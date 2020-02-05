@@ -3,6 +3,7 @@ package com.marco.restServices.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -47,6 +48,7 @@ public class SongController {
 	
 	//POST: to create songs out of songService create method
 	@PostMapping
+	@CrossOrigin
 	@ApiOperation(value="Creates a song in the database")
 	public StandardResponse<Songs> create(@RequestBody Songs Song){
 		return songService.create(Song);
@@ -60,6 +62,7 @@ public class SongController {
 	}	
 	
 	@GetMapping ("/album/{albumId}")
+	@CrossOrigin
 	@ApiOperation(value="Find by album id")
 	public List <Songs> findByAlbumId (@PathVariable("albumId") Integer albumId){
 		return songService.findByAlbumId(albumId);

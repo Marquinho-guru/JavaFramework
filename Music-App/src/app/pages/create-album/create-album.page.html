@@ -1,0 +1,34 @@
+<ion-header>
+    <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>create-album</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-list>
+  <ion-item>
+    <ion-label position="floating">Title</ion-label>
+    <ion-input [(ngModel)]="album.title" ></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Release Date</ion-label>
+    <ion-datetime [pickerOptions]="customPickerOptions" displayFormat="YYYY" min="1950" max="2020"></ion-datetime>
+  </ion-item>
+  
+  <ion-item>
+    <ion-label position="floating">Price</ion-label>
+    <ion-input [(ngModel)]="album.price"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Genere</ion-label>
+    <ion-input  [(ngModel)]="album.genre"></ion-input>
+  </ion-item>
+</ion-list>
+
+<ion-button expand="block" (click)="saveAlbum()" >Save</ion-button>
+</ion-content>
+

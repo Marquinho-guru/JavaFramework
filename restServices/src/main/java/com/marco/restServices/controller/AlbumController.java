@@ -3,6 +3,7 @@ package com.marco.restServices.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,36 +29,42 @@ public class AlbumController {
 	private AlbumService albumService;
 
 	@PostMapping
+	@CrossOrigin
 	@ApiOperation(value="Creates an album in the database")
 	public StandardResponse<Album> createAlbum(@RequestBody Album album){
 		return albumService.createAlbum(album);
 	}
 
 	@GetMapping
+	@CrossOrigin
 	@ApiOperation (value = "Retrieves all album in database")
 	public List <Album> findAll(){
 		return albumService.findAll();
 	}
 
 	@GetMapping("/{albumId}")
+	@CrossOrigin
 	@ApiOperation (value = "Gets an album by its Id")
 	public Album findById(@PathVariable("albumId") Integer id) {
 		return albumService.findById(id);
 	}
 
 	@DeleteMapping("/{albumId}")
+	@CrossOrigin
 	@ApiOperation (value = "Deletes an album in db by its ID")
 	public StandardResponse<Album> deleteById (@PathVariable("albumId") Integer id) {
 		return albumService.deleteById(id);
 	}
 
 	@GetMapping("/count")
+	@CrossOrigin
 	@ApiOperation (value = "Retrieves the total of objects in albums table")
 	public Long count() {
 		return albumService.count();
 	}
 
 	@PutMapping
+	@CrossOrigin
 	@ApiOperation (value = "Updates an existing album with the given information")
 	public StandardResponse<Album> updateAlbum(@RequestBody Album album){
 		return albumService.updateAlbum(album);
