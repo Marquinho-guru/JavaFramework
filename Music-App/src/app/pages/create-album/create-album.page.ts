@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlbumServiceService } from 'src/app/services/album-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-album',
@@ -15,7 +16,8 @@ export class CreateAlbumPage implements OnInit {
       "genre": ""
   }
 
-  constructor(private albumApi:AlbumServiceService) { }
+  constructor(private albumApi:AlbumServiceService,
+              private router:Router) { }
 
   ngOnInit() {
   }
@@ -24,5 +26,6 @@ export class CreateAlbumPage implements OnInit {
     console.log(this.album);
     this.albumApi.createAlbum(this.album).subscribe(
       res => {console.log(res)});
+      this.router.navigateByUrl("/");
   }
 }

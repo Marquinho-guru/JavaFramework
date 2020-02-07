@@ -21,4 +21,8 @@ export class SongsService {
    return this.http.post(this.songApiUrl, JSON.stringify(song),header);
   }
 
+  getSongById(songId){
+    console.log(songId);
+    return this.http.get(this.songApiUrl + songId);
+  }
 }

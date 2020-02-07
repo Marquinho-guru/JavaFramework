@@ -26,4 +26,9 @@ export class SongsPage implements OnInit {
   openCreateSongs(){
     this.router.navigateByUrl('create-songs/'+this.albumId);
   }
+
+  openSongDetailsPage(songId){
+    this.router.navigateByUrl('song-detail/'+ songId);
+  }
+
 }

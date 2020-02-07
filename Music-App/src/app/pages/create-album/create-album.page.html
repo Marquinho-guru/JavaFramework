@@ -16,7 +16,7 @@
 
   <ion-item>
     <ion-label>Release Date</ion-label>
-    <ion-datetime [pickerOptions]="customPickerOptions" displayFormat="YYYY" min="1950" max="2020"></ion-datetime>
+    <ion-datetime [(ngModel)]="album.releaseDate" [pickerOptions]="customPickerOptions" displayFormat="YYYY" min="1950" max="2020"></ion-datetime>
   </ion-item>
   
   <ion-item>

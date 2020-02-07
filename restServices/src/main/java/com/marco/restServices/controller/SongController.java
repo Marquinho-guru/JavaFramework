@@ -29,6 +29,7 @@ public class SongController {
 	private SongService songService;
 	
 	@GetMapping("/{id}")
+	@CrossOrigin
 	@ApiOperation(value="Retrieves all song by its id")
 	public Songs findById (@PathVariable("id") Integer id) {
 		return songService.findById(id);

@@ -28,6 +28,14 @@ const routes: Routes = [
     path: 'create-songs/:albumId',
     loadChildren: () => import('./pages/create-songs/create-songs.module').then( m => m.CreateSongsPageModule)
   },
+  {
+    path: 'song-detail',
+    loadChildren: () => import('./pages/song-detail/song-detail.module').then( m => m.SongDetailPageModule)
+  },
+  {
+    path: 'song-detail/:songId',
+    loadChildren: () => import('./pages/song-detail/song-detail.module').then( m => m.SongDetailPageModule)
+  },
 ];
 
 @NgModule({

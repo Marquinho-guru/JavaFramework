@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color = "primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{song.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Id: {{song.id}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Album: {{albumTitle}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Title: {{song.title}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Time: {{song.time}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
