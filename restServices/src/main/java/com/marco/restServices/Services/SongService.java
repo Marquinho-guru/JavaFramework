@@ -9,13 +9,16 @@ import org.springframework.web.servlet.function.ServerResponse;
 import com.marco.restServices.entity.Album;
 import com.marco.restServices.entity.Songs;
 import com.marco.restServices.entity.StandardResponse;
+import com.marco.restServices.exceptions.EmptyValueException;
 import com.marco.restServices.repository.SongRepository;
+import com.marco.restServices.util.UtilConstants;
 
 @Service
 public class SongService {
 
 	@Autowired
 	private SongRepository songRepository;
+	private Songs song;
 	
 	public List<Songs> findAll(){
 		return songRepository.findAll();
@@ -24,12 +27,24 @@ public class SongService {
 	public StandardResponse<Songs> create(Songs song){
 		StandardResponse<Songs> response = new StandardResponse<>();
 		try {
+			Double.parseDouble(song.getTime());
+			if (song.checkEmpty()) {
+				throw new EmptyValueException("All fields are required");
+			}			
 			response.setEntity(songRepository.save(song));
-			response.setStatus("SUCCESS!");
-			response.setResponseText("Song Saved!");
-		} catch (Exception e) {
+			response.setStatus(UtilConstants.SUCCESS_MSG);
+			response.setResponseText("Song Saved");
+		} catch (EmptyValueException e) {
 			response.setEntity(null);
-			response.setStatus("ERROR");
+			response.setStatus(UtilConstants.ERROR_MSG);
+			response.setResponseText(e.getMessage());
+		} catch (NumberFormatException e) {
+			response.setEntity(null);
+			response.setStatus(UtilConstants.ERROR_MSG);
+			response.setResponseText("Invalid time value!");
+		}catch (Exception e) {
+			response.setEntity(null);
+			response.setStatus(UtilConstants.ERROR_MSG);
 			response.setResponseText(e.getMessage());
 		}
 		return response;
@@ -48,11 +63,11 @@ public class SongService {
 		try {
 			response.setEntity(findById(id));
 			songRepository.deleteById(id);
-			response.setStatus("SUCCESS");
+			response.setStatus(UtilConstants.SUCCESS_MSG);
 			response.setResponseText("Song with Id: "+ id + " deleted!");
 		} catch (Exception e) {
 			response.setEntity(null);
-			response.setStatus("ERROR");
+			response.setStatus(UtilConstants.ERROR_MSG);
 			response.setResponseText(e.getMessage());
 		}
 		return response;

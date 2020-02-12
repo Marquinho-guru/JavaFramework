@@ -69,6 +69,14 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 			this.genre = genre;
 		}
 
+		public boolean checkEmpty() {
+			if (this.getTitle().equals("") ||
+				this.getReleaseDate().equals("") || 
+				this.getPrice().equals("") || 
+				this.getGenre().equals(""))return true;
+			return false;
+		}
+		
 		@Override
 		public String toString() {
 			return "Album [id=" + id + ", title=" + title + ", releaseDate=" + releaseDate + ", price=" + price

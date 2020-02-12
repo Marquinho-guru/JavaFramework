@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.marco.restServices.entity.Album;
 import com.marco.restServices.entity.StandardResponse;
+import com.marco.restServices.exceptions.EmptyValueException;
 import com.marco.restServices.repository.AlbumRepository;
 import com.marco.restServices.repository.SongRepository;
+import com.marco.restServices.util.UtilConstants;
 
 @Service	
 public class AlbumService {
@@ -23,15 +25,28 @@ public class AlbumService {
 	
 	public StandardResponse<Album> createAlbum(Album album){
 		System.out.println(album);
-		album.setReleaseDate(album.getReleaseDate().substring(0,3));
+		album.setReleaseDate(album.getReleaseDate().substring(0,4));
 		StandardResponse<Album> response = new StandardResponse<Album>();
+			
 		try {
+			Double.parseDouble(album.getPrice());
+			if (album.checkEmpty()) {
+				throw new EmptyValueException("All fields are required");
+			}
 			response.setEntity(albumRepository.save(album));
-			response.setStatus("SUCCESS!");
+			response.setStatus(UtilConstants.SUCCESS_MSG);
 			response.setResponseText("Album Saved!");
-		} catch (Exception e) {
+		}catch(EmptyValueException e) {
 			response.setEntity(null);
-			response.setStatus("ERROR");
+			response.setStatus(UtilConstants.ERROR_MSG);
+			response.setResponseText(e.getMessage());
+		} catch (NumberFormatException e) {
+			response.setEntity(null);
+			response.setStatus(UtilConstants.ERROR_MSG);
+			response.setResponseText("Price should be a number");
+		}catch (Exception e) {
+			response.setEntity(null);
+			response.setStatus(UtilConstants.ERROR_MSG);
 			response.setResponseText(e.getMessage());
 		}
 		return response;
@@ -51,15 +66,15 @@ public class AlbumService {
 			response.setEntity(findById(id));
 			if (!songRepository.findByAlbumId(id).isEmpty()) throw new SQLIntegrityConstraintViolationException();
 			albumRepository.deleteById(id);
-			response.setStatus("SUCCESS");
+			response.setStatus(UtilConstants.SUCCESS_MSG);
 			response.setResponseText("album with Id: "+ id + " deleted!");
 		}catch (SQLIntegrityConstraintViolationException e ) {
 			response.setEntity(null);
-			response.setStatus("ERROR");
+			response.setStatus(UtilConstants.ERROR_MSG);
 			response.setResponseText("Album with id:"+id + " has song saved!");
 		}catch (Exception e) {
 			response.setEntity(null);
-			response.setStatus("ERROR");
+			response.setStatus(UtilConstants.ERROR_MSG);
 			response.setResponseText(e.getMessage());
 		}
 		return response;

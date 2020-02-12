@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
+import { ToastController } from '@ionic/angular';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AlbumServiceService {
 
   private albumApiUrl: string = "http://localhost:8080/api/v1/album";
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private toastController:ToastController) { }
 
+
+  private response: any;
   getAll(){
     return this.http.get(this.albumApiUrl);
   }
@@ -24,4 +29,9 @@ export class AlbumServiceService {
    }
   return this.http.post(this.albumApiUrl, JSON.stringify(album),header);
  }
+
+ deleteAlbum(albumId){
+   return this.http.delete(this.albumApiUrl + "/" + albumId);
+  };
+ 
 }
