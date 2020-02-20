@@ -30,7 +30,7 @@ export class AlbumsPage implements OnInit {
     this.albums = res;
     console.log (this.albums)  
     });
-    this.albumApi.getalbumById(7).subscribe(res=>{console.log(res)});
+    
   }
 
 openSongsPage(albumId){
@@ -51,6 +51,10 @@ delete(albumId){
         }   
       }
       );
+    }
+
+    update (albumId){
+      this.router.navigateByUrl('edit-album/'+albumId);
     }
 
     succesToast(msg){

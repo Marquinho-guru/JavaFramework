@@ -9,7 +9,7 @@
     <ion-item *ngFor="let album of albums" detail >
       <ion-label (click)="openSongsPage(album.id)">{{album.title}}</ion-label> 
         <ion-buttons slot="end">
-          <ion-button>
+          <ion-button (click)="update(album.id)">
             <ion-icon slot="icon-only" name="create"></ion-icon>
           </ion-button>
 

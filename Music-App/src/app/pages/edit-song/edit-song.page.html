@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color= "primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Edit songs</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-content>
+    <ion-list> 
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input [(ngModel)]="song.title"></ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="floating">Time</ion-label>
+        <ion-input [(ngModel)]="song.time"></ion-input>
+      </ion-item>
+    </ion-list>
+  
+    <ion-button expand="block" (click)="updateSong()">Update</ion-button>
+  
+</ion-content>

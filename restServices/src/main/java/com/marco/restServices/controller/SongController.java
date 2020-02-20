@@ -36,12 +36,14 @@ public class SongController {
 	}
 	
 	@DeleteMapping("/{id}")
+	@CrossOrigin
 	@ApiOperation(value="Deletes a song by its id")
 	public StandardResponse<Songs> deletedById(@PathVariable("id") Integer id){
 		return songService.deleteById(id);
 	}
 	
 	@PutMapping
+	@CrossOrigin
 	@ApiOperation(value="Updates an existing song with the given informatio")
 	public StandardResponse<Songs> update(@RequestBody Songs song){
 		return songService.update(song);

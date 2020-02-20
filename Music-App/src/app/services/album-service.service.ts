@@ -7,7 +7,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class AlbumServiceService {
 
-  private albumApiUrl: string = "http://localhost:8080/api/v1/album";
+  private albumApiUrl: string = "http://ec2-3-91-226-94.compute-1.amazonaws.com:8080/api/v1/album/";
   constructor(private http: HttpClient,
               private toastController:ToastController) { }
 
@@ -30,8 +30,18 @@ export class AlbumServiceService {
   return this.http.post(this.albumApiUrl, JSON.stringify(album),header);
  }
 
+ updateAlbum(album){
+  let header = {
+    "headers":{
+      "Content-Type": "application/json"
+    }
+  }
+ return this.http.put(this.albumApiUrl, JSON.stringify(album),header);
+ }
+
  deleteAlbum(albumId){
    return this.http.delete(this.albumApiUrl + "/" + albumId);
   };
  
+  
 }
